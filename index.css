@@ -1,0 +1,11 @@
+#colors {
+	display: flex;
+	gap: 10px;
+}
+
+#colors>* {
+	height: 50px;
+	width: 50px;
+	border-style: solid;
+	border-color: black;
+}
