@@ -6,8 +6,8 @@ const select = document.getElementById("select");
 const color = document.getElementById("color");
 const colors = document.getElementById("colors");
 
-const canvasWidth = 500;
-const canvasHeight = 300;
+const canvasWidth = 1000;
+const canvasHeight = 800;
 
 function ditherFloydSteinberg(data, pallete) {
   for (var i = 0; i < data.length; i += 4) {
