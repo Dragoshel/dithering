@@ -10,15 +10,20 @@ export default class Pallete {
   public colors: Color[] = [];
 
   constructor() {
-    const display = document.getElementById("display")!;
-    const picker = document.getElementById("picker")! as HTMLInputElement;
+    const colorDisplay = document.getElementById("colorDisplay")!;
+    const colorButton = document.getElementById("colorButton")! as HTMLButtonElement;
+    const colorPicker = document.getElementById("colorPicker")! as HTMLInputElement;
 
-    picker.addEventListener("change", () => {
-      const div = document.createElement("div");
-      div.setAttribute("style", `background-color: ${picker.value}`);
-      display.append(div);
+    colorButton.addEventListener("click", () => {
+      colorPicker.click();
+    });
 
-      const color = hexToColor(picker.value);
+    colorPicker.addEventListener("input", () => {
+      const newColor = document.createElement("div");
+      newColor.setAttribute("style", `background-color: ${colorPicker.value}`);
+      colorDisplay.insertBefore(newColor, colorButton);
+
+      const color = hexToColor(colorPicker.value);
       this.colors.push(color);
     });
   }

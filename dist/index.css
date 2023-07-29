@@ -1,13 +1,26 @@
-#display {
+body {
+    height: 100vh;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
-#display>* {
+#colorButton {
+    display: flex;
+    padding: 0;
+}
+
+#colorDisplay {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+}
+
+#colorDisplay>* {
     height: 50px;
     width: 50px;
-    border-style: solid;
-    border-color: black;
 }
 
 #renderingImageContainer {
@@ -26,4 +39,11 @@
     height: auto;
     display: block;
     position: absolute;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
