@@ -11,42 +11,56 @@ export default class DitheringCanvas {
   private _offscreenContext: CanvasRenderingContext2D;
 
   private _renderingImage: HTMLImageElement;
+  private _renderingImageContainer: HTMLImageElement;
 
-  private scale: number;
-  private isDragging: boolean;
-  private offsetX: number;
-  private offsetY: number;
+  private scale: number = 1;
+  private isDragging: boolean = false;
+
+  private offsetX: number = 0;
+  private offsetY: number = 0;
+
+  private initialX: number = 0;
+  private initialY: number = 0;
 
   constructor() {
     this._offscreenCanvas = document.getElementById("offscreenCanvas")! as HTMLCanvasElement;
     this._offscreenContext = this._offscreenCanvas.getContext("2d")!;
 
     this._renderingImage = document.getElementById("renderingImage")! as HTMLImageElement;
+    this._renderingImageContainer = document.getElementById("renderingImageContainer")! as HTMLImageElement;
 
-    this.scale = 1;
-
-    this.isDragging = false;
-
-    this.offsetX = 0;
-    this.offsetY = 0;
-
-    this._renderingImage.addEventListener("wheel", event => {
-      this.scale += event.deltaY / 1000;
-      this._renderingImage.style.scale = this.scale.toString();
+    this._renderingImageContainer.addEventListener("wheel", event => {
+      if (this.scale >= 0.5) {
+        this.scale -= event.deltaY / 1000;
+        this._renderingImage.style.scale = this.scale.toString();
+      } else {
+        this.scale = 0.5;
+      }
     }); 
 
-    this._renderingImage.addEventListener("dragstart", event => {
+    this._renderingImageContainer.addEventListener("mousedown", event => {
       this.isDragging = true;
-      this._renderingImage.addEventListener("mousemove", event => {
-        if (this.isDragging) {
-          this._renderingImage.style.transform = `translate(${event.offsetX / 10}px, ${event.offsetY / 10}px)`;
-        }
-        return false;
-      });
+      this.initialX = event.clientX;
+      this.initialY = event.clientY;
+      this.offsetX = this._renderingImage.offsetLeft;
+      this.offsetY = this._renderingImage.offsetTop;
+
+      this._renderingImageContainer.style.cursor = "grabbing";
     });
 
-    this._renderingImage.addEventListener("dragend", event => {
+    this._renderingImageContainer.addEventListener("mousemove", event => {
+      if (this.isDragging) {
+        const x = event.clientX - this.initialX + this.offsetX;
+        const y = event.clientY - this.initialY + this.offsetY;
+
+        this._renderingImage.style.left = `${x}px`;
+        this._renderingImage.style.top = `${y}px`;
+      }
+    });
+
+    this._renderingImageContainer.addEventListener("mouseup", event => {
       this.isDragging = false;
+      this._renderingImageContainer.style.cursor = "grab";
     });
   }
 

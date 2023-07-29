@@ -4,10 +4,13 @@
 	<title>Dithering!</title>
 	<body>
 		<canvas id="offscreenCanvas" hidden></canvas>
-		<section class="rendering-image-container">
-			<img id="renderingImage">
-		</section>
+
+		<div id="renderingImageContainer">
+			<img id="renderingImage" draggable="false">
+		</div>
+
 		<div id="display"></div>
+
 		<form id="form">
 			<input id="input" type="file" accept="image/*">
 			<input id="picker" type="color">
