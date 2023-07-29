@@ -58,7 +58,7 @@ export default class DitheringCanvas {
       }
     });
 
-    this._renderingImageContainer.addEventListener("mouseup", event => {
+    this._renderingImageContainer.addEventListener("mouseup", () => {
       this.isDragging = false;
       this._renderingImageContainer.style.cursor = "grab";
     });
@@ -80,12 +80,16 @@ export default class DitheringCanvas {
     this._offscreenCanvas.height = value;
   }
 
+  public drawImage(image: HTMLImageElement) {
+    this._offscreenContext.drawImage(image, 0, 0);
+    this._renderingImage.src = this._offscreenCanvas.toDataURL();
+  }
+
   public dither(image: HTMLImageElement, pallete: Pallete, algo: Algorithm) {
     this._offscreenContext.drawImage(image, 0, 0);
-
     const imageData = this._offscreenContext.getImageData(0, 0, this.width, this.height)!;
-
     const data = imageData?.data;
+
     if (pallete.colors.length > 0) {
       switch (algo) {
 

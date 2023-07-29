@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" type="text/css" href="index.css">
-	<title>Dithering!</title>
-	<body>
-		<canvas id="offscreenCanvas" hidden></canvas>
-		<section style="display: flex; gap: 20px;">
-			<div>
-				<div id="renderingImageContainer">
-					<img id="renderingImage" draggable="false">
-				</div>
-				
-				<h3 style="margin-left: 10px;">Color Pallete</h3>
-				<div id="colorDisplay">
-					<button id="colorButton">
-						<img src="plus.svg">
-					</button>
-				</div>
-			</div>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <title>Dithering!</title>
+  <body>
+    <canvas id="offscreenCanvas" hidden></canvas>
+    <section style="display: flex; gap: 20px;">
+      <div>
+        <div id="renderingImageContainer">
+          <img id="renderingImage" draggable="false">
+        </div>
+        
+        <h3 style="margin-left: 10px;">Color Pallete</h3>
+        <div id="colorDisplay">
+          <button id="colorButton">
+            <img src="plus.svg">
+          </button>
+        </div>
+      </div>
 
-			<div class="flex-center" style="gap: 50px;">
-				<input id="colorPicker" type="color" hidden>
+      <div class="flex-center" style="gap: 50px;">
+        <input id="colorPicker" type="color" hidden>
 
-				<div class="flex-center">
-					<label for="input"><h3>Image</h3></label>
-					<input id="input" type="file" accept="image/*">
-				</div>
+        <div class="flex-center">
+          <label for="input"><h3>Image</h3></label>
+          <input id="input" type="file" accept="image/*">
+        </div>
 
-				<div class="flex-center">
-					<label for="select"><h3>Dithering Algorithm</h3></label>
-					<select id="select">
-						<option>Nearest</option>
-						<option>Floyd-Steinberg</option>
-					</select>
-				</div>
-			</div>
-		</section>
-	</body>
-	<script src="bundle.js"></script>
+        <div class="flex-center">
+          <label for="select"><h3>Dithering Algorithm</h3></label>
+          <select id="select">
+            <option>Nearest</option>
+            <option>Floyd-Steinberg</option>
+          </select>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="bundle.js"></script>
 </html>

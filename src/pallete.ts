@@ -9,23 +9,35 @@ export type Color = {
 export default class Pallete {
   public colors: Color[] = [];
 
-  constructor() {
-    const colorDisplay = document.getElementById("colorDisplay")!;
-    const colorButton = document.getElementById("colorButton")! as HTMLButtonElement;
-    const colorPicker = document.getElementById("colorPicker")! as HTMLInputElement;
+  private _colorButton: HTMLButtonElement;
+  private _colorDisplay: HTMLElement;
+  private _colorPicker: HTMLInputElement;
 
-    colorButton.addEventListener("click", () => {
-      colorPicker.click();
+  constructor() {
+    this._colorDisplay = document.getElementById("colorDisplay")!;
+    this._colorButton = document.getElementById("colorButton")! as HTMLButtonElement;
+    this._colorPicker = document.getElementById("colorPicker")! as HTMLInputElement;
+
+    this._colorButton.addEventListener("click", () => {
+      this._colorPicker.click();
     });
 
-    colorPicker.addEventListener("input", () => {
+    this._colorPicker.addEventListener("input", () => {
       const newColor = document.createElement("div");
-      newColor.setAttribute("style", `background-color: ${colorPicker.value}`);
-      colorDisplay.insertBefore(newColor, colorButton);
+      newColor.setAttribute("style", `background-color: ${this._colorPicker.value}`);
+      this._colorDisplay.insertBefore(newColor, this._colorButton);
 
-      const color = hexToColor(colorPicker.value);
+      const color = hexToColor(this._colorPicker.value);
       this.colors.push(color);
     });
+  }
+
+  get colorButton(): HTMLButtonElement {
+    return this._colorButton;
+  }
+
+  get colorPicker(): HTMLInputElement {
+    return this._colorPicker;
   }
 
   public findNearestColor(color: Color): Color {
